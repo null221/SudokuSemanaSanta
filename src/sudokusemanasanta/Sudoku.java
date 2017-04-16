@@ -10,7 +10,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ *Clase sudoku que controlara
+ * las posiciones donde se van a marcar los numeros
  * @author Antonio
  */
 public class Sudoku 
@@ -19,13 +20,19 @@ public class Sudoku
     private ArrayList<ArrayList<Integer>> sudo;
     private Random aleatorio;
     
-    
+    /**
+     * constructor por defecto de la clase sudoku
+     */
     public Sudoku()
     {
         sudo = new ArrayList<>();
     }
     
-    
+    /**
+     * esta clase creara la cuadricula de nuestro sudoku con 0
+     * Nos pondra al azar 24 numeros repartidos por los cuadrantes 
+     * 
+     */
     public void inicializar()
     {
         aleatorio = new Random();
@@ -63,7 +70,10 @@ public class Sudoku
         }
     }
     
-    
+    /**
+     * metodo toString muesra el sudoku por pantalla
+     * @return devuelve un string con saltos de linea para formar la cuadricula
+     */
     @Override
     public String toString()
     {
@@ -79,7 +89,13 @@ public class Sudoku
         }
         return resultadoFinal;
     }
-    
+    /**
+     * Modifica un elemento en el que se pueda insertar Uno valido utilizando el metodo puedoinsertar
+     * @param fila numero de fila que queremos insertar el elemento  
+     * @param columna numero de columna en la que queremos insertar el elemento
+     * @param elemento numero a insertar
+     * @throws SudokuException controlamos la excepcion si no se puede iinsertar el elemento
+     */
     public void modificarElemento(int fila, int columna, int elemento) throws SudokuException
     {
         if (puedoInsertar(fila, columna, elemento)== true)
@@ -89,12 +105,21 @@ public class Sudoku
         else
             System.out.println("Error modificando elemento");
     }
-    
+    /**
+     * Con este metodo cambiamos el numero introducido por un elemento vacio, en nuestro caso un 0
+     * @param fila numero de la fila de la posicion a borrar
+     * @param columna numero de la columna de la posicion a borrar
+     */
     public void vaciarElemento (int fila, int columna)
     {
         sudo.get(fila-1).set(columna-1, 0);
     }
-    
+    /**
+     * metodo para comprobar si la fila contiene ese elemento
+     * @param fila numero de la fila
+     * @param elemento numero a insertar
+     * @return devuelve falso si el elemento se repite en la fila
+     */
     private boolean comprobarFila(int fila, int elemento)
     {
         boolean resultado = true;
@@ -107,7 +132,12 @@ public class Sudoku
         }
         return resultado;
     }
-    
+    /**
+     * metodo para comprobar si la columna contiene ese elemento
+     * @param columna numero de la columna
+     * @param elemento numero a insertar
+     * @return devuelve falso si el elemento se repite en la columna
+     */
     private boolean comprobarColumna(int columna, int elemento)
     {
         boolean resultado = true;
@@ -125,7 +155,13 @@ public class Sudoku
         
         return resultado;
     }
-    
+    /**
+     * este metodo comprueba si el elemento estÃ¡ dentro de las cuadriculas que van divididas en 3x3
+     * @param fila numero de la fila a comprobar cuadrante
+     * @param columna numero de la columna a comprobar cuadrante
+     * @param elemento elemento a insertar en el cuadrante
+     * @return devuelve falso en caso de que se repita el numero en el cuadrante
+     */
     private boolean comprobarCuadrante(int fila, int columna, int elemento)
     {
         boolean resultado = true;
@@ -185,7 +221,13 @@ public class Sudoku
         
         return resultado;
     }
-    
+     /**
+     * metodo donde comprueba que se puede insertar en esa fila en la columna y en esa cuadricula
+     * @param fila numero de la fila a isertar
+     * @param columna numero de la columna a isertar
+     * @param elemento numero a insertar en la casilla
+     * @return devuelve verdadero si cumple los tres metodos anteriores
+     */
     private boolean puedoInsertar(int fila, int columna, int elemento)
     {
         boolean resultado = false;

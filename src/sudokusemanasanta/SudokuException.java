@@ -6,7 +6,7 @@
 package sudokusemanasanta;
 
 /**
- *
+ *Clase sudokuException que lanzara un mensaje si falla algun procreso
  * @author Antonio
  */
 class SudokuException extends Exception
